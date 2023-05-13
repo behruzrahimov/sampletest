@@ -1,7 +1,6 @@
 import styles from "./login.styles.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import React from "react";
 import {
   Box,
   Button,
@@ -15,6 +14,9 @@ import {
 import { AccountCircle, Visibility, VisibilityOff } from "@mui/icons-material";
 import { Lock } from "@mui/icons-material";
 export default function Login({ logined }: { logined: (e: boolean) => void }) {
+  // ---------------------------------------------------------------------------
+  // variables
+  // ---------------------------------------------------------------------------
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -23,15 +25,10 @@ export default function Login({ logined }: { logined: (e: boolean) => void }) {
   const [passwordChanges, setPasswordChanges] = useState(0);
   const [timeUsername, setTimeUsername] = useState<number[]>([]);
   const [timePassword, setTimePassword] = useState<number[]>([]);
-
   const [showPassword, setShowPassword] = useState(false);
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-  };
+  // ---------------------------------------------------------------------------
+  // effects
+  // ---------------------------------------------------------------------------
   useEffect(() => {
     !startTime && setStartTime(Date.now);
     const delayDebounceFn = setTimeout(() => {
@@ -46,6 +43,10 @@ export default function Login({ logined }: { logined: (e: boolean) => void }) {
     }, 500);
     return () => clearTimeout(delayDebounceFn);
   }, [password]);
+
+  // ---------------------------------------------------------------------------
+  // functions
+  // ---------------------------------------------------------------------------
 
   function send() {
     if (username && password) {
@@ -63,6 +64,17 @@ export default function Login({ logined }: { logined: (e: boolean) => void }) {
       navigate("/question1");
     }
   }
+
+  function handleClickShowPassword() {
+    setShowPassword((show) => !show);
+  }
+
+  function handleMouseDownPassword(event: MouseEvent<HTMLButtonElement>) {
+    event.preventDefault();
+  }
+
+  // ---------------------------------------------------------------------------
+
   return (
     <div className={styles.container}>
       <div className={styles.login}>

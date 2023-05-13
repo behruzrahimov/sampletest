@@ -4,14 +4,25 @@ import { TextField, Autocomplete, Button } from "@mui/material";
 import styles from "./question2.styles.module.css";
 const timeOfYear = ["Winter", "Spring", "Summer", "Autumn"];
 export default function Question2Page() {
+  // ---------------------------------------------------------------------------
+  // variables
+  // ---------------------------------------------------------------------------
   const navigate = useNavigate();
   const [startTime, setStartTime] = useState(0);
   const [selected, setSelected] = useState<string[]>([]);
   const [timeSelecting, setTimeSelecting] = useState<number[]>([]);
+
+  // ---------------------------------------------------------------------------
+  // effects
+  // ---------------------------------------------------------------------------
+
   useEffect(() => {
     !startTime && setStartTime(Date.now);
   }, []);
 
+  // ---------------------------------------------------------------------------
+  // functions
+  // ---------------------------------------------------------------------------
   function send() {
     if (setSelected.length) {
       const question2 = {
@@ -25,6 +36,8 @@ export default function Question2Page() {
       navigate("/result");
     }
   }
+
+  // ---------------------------------------------------------------------------
   return (
     <div className={styles.container}>
       <div className={styles.questionContainer}>

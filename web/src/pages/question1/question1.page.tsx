@@ -3,12 +3,18 @@ import { useNavigate } from "react-router-dom";
 import { Button, TextField } from "@mui/material";
 import styles from "./question1.styles.module.css";
 export default function Question1Page() {
+  // ---------------------------------------------------------------------------
+  // variables
+  // ---------------------------------------------------------------------------
   const [number, setNumber] = useState(0);
   const navigate = useNavigate();
   const [startTime, setStartTime] = useState(0);
   const [timeNumber, setTimeNumber] = useState<number[]>([]);
   const [listAges, setListAges] = useState<number[]>([]);
 
+  // ---------------------------------------------------------------------------
+  // effects
+  // ---------------------------------------------------------------------------
   useEffect(() => {
     const login = localStorage.getItem("login");
     if (!login) {
@@ -22,6 +28,9 @@ export default function Question1Page() {
     return () => clearTimeout(delayDebounceFn);
   }, [number]);
 
+  // ---------------------------------------------------------------------------
+  // functions
+  // ---------------------------------------------------------------------------
   function send() {
     if (number) {
       const question1 = {
@@ -34,6 +43,9 @@ export default function Question1Page() {
       navigate("/question2");
     }
   }
+
+  // ---------------------------------------------------------------------------
+
   return (
     <div className={styles.container}>
       <div className={styles.questionContainer}>

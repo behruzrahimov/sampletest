@@ -13,6 +13,9 @@ import {
 } from "@mui/material";
 import { browserName, browserVersion } from "react-device-detect";
 export default function ResultPage() {
+  // ---------------------------------------------------------------------------
+  // variables
+  // ---------------------------------------------------------------------------
   const login = JSON.parse(localStorage.getItem("login")!);
   const question1 = JSON.parse(localStorage.getItem("question1")!);
   const question2 = JSON.parse(localStorage.getItem("question2")!);
@@ -26,6 +29,10 @@ export default function ResultPage() {
     current.getMonth() + 1
   }/${current.getFullYear()}`;
 
+  // ---------------------------------------------------------------------------
+  // effects
+  // ---------------------------------------------------------------------------
+
   useEffect(() => {
     getData().then((data) => setIP(data.IPv4));
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -34,6 +41,9 @@ export default function ResultPage() {
     });
   }, []);
 
+  // ---------------------------------------------------------------------------
+  // functions
+  // ---------------------------------------------------------------------------
   async function getData() {
     const response = await fetch("https://geolocation-db.com/json/");
     const data = await response.json();
@@ -43,6 +53,8 @@ export default function ResultPage() {
   function handleClick() {
     setOpen(!open);
   }
+
+  // ---------------------------------------------------------------------------
   return (
     <div className={styles.container}>
       <div className={styles.resultContainer}>
